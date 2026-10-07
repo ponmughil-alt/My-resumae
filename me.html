@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponmughil - Modern Resume</title>
+    <!-- Modern Typography: Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           COLOR PALETTE & CSS VARIABLES
+           ========================================== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #d946ef 100%);
+            --header-bg: #0f172a;
+            --card-bg: #ffffff;
+            --body-bg: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --accent-purple: #7c3aed;
+            --accent-pink: #d946ef;
+            --accent-indigo: #4f46e5;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-subtle: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+            --shadow-hover: 0 25px 50px -12px rgba(124, 58, 237, 0.25);
+        }
+
+        /* Reset & Base Setup */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2.5rem 1rem;
+            min-height: 100vh;
+        }
+
+        /* Main Container Card */
+        .resume-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        /* ==========================================
+           HEADER SECTION (Centered Photo & Gradient Accent)
+           ========================================== */
+        header {
+            background: var(--header-bg);
+            color: #ffffff;
+            text-align: center;
+            padding: 4rem 2rem 3rem 2rem;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.35) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(217, 70, 239, 0.25) 0%, transparent 40%);
+        }
+
+        /* Avatar Box with Glowing Gradient Ring */
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            border: 4px solid var(--header-bg);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Contact Details Pills */
+        .contact-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           MAIN CONTENT LAYOUT
+           ========================================== */
+        .content-body {
+            padding: 3rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-purple);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Gradient Bullet Accent */
+        .section-title::before {
+            content: '';
+            width: 8px;
+            height: 24px;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Block Cards for Objective & Education */
+        .info-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--accent-purple);
+            padding: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 2rem;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .info-card strong {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* ==========================================
+           SKILLS & STRENGTHS (MODERN TAG BADGES)
+           ========================================== */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Modern Skill Pill Badges */
+        .skill-tag {
+            background: #f1f5f9;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.3);
+        }
+
+        /* Strength Badges (Slightly Different Accent Palette) */
+        .strength-tag {
+            background: #f0fdf4;
+            color: #166534;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #bbf7d0;
+            transition: all 0.3s ease;
+        }
+
+        .strength-tag:hover {
+            background: #16a34a;
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(22, 163, 74, 0.3);
+        }
+
+        /* ==========================================
+           DECLARATION SECTION
+           ========================================== */
+        .declaration-box {
+            background: #faf5ff;
+            border: 1px dashed #d8b4fe;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 1rem;
+        }
+
+        .declaration-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .declaration-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9d5ff;
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+
+        /* ==========================================
+           RESPONSIVE MOBILE STYLES
+           ========================================== */
+        @media (max-width: 640px) {
+            header {
+                padding: 3rem 1.5rem 2rem 1.5rem;
+            }
+
+            .content-body {
+                padding: 2rem 1.25rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .declaration-footer {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Print Mode Optimization */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+            .resume-card {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            header {
+                background: #0f172a !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .skill-tag, .strength-tag {
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-card">
+        
+        <!-- HEADER: Centered Glowing Photo & Gradient Title -->
+        <header>
+            <div class="avatar-container">
+                <img src="mughil2.jpeg" alt="Ponmughil Profile Photo">
+            </div>
+            <h1>Ponmughil</h1>
+            
+            <div class="contact-bar">
+                <a href="mailto:ponmughil@gmail.com" class="contact-item">📧 ponmughil@gmail.com</a>
+                <a href="tel:+917010002771" class="contact-item">📱 +91 70100 02771</a>
+            </div>
+        </header>
+
+        <!-- MAIN BODY CONTENT -->
+        <div class="content-body">
+
+            <!-- CAREER OBJECTIVE -->
+            <section>
+                <h2 class="section-title">Career Objective</h2>
+                <div class="info-card">
+                    <p>Motivated first-year B.E Computer Science and Engineering student seeking opportunities to develop technical skills and gain practical experience in software development and the IT industry.</p>
+                </div>
+            </section>
+
+            <!-- EDUCATION -->
+            <section>
+                <h2 class="section-title">Education</h2>
+                <div class="info-card">
+                    <strong>B.E Computer Science and Engineering (Pursuing)</strong>
+                    <p>Rathinam Technical Campus</p>
+                </div>
+            </section>
+
+            <!-- TECHNICAL SKILLS (Interactive Pill Badges) -->
+            <section>
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="tags-container">
+                    <span class="skill-tag">C Programming</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Data Structures</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">MS Office (Word, PowerPoint)</span>
+                </div>
+            </section>
+
+            <!-- STRENGTHS -->
+            <section>
+                <h2 class="section-title">Strengths</h2>
+                <div class="tags-container">
+                    <span class="strength-tag">Quick Learner</span>
+                    <span class="strength-tag">Good Communication</span>
+                    <span class="strength-tag">Team Player</span>
+                    <span class="strength-tag">Problem Solving</span>
+                </div>
+            </section>
+
+            <!-- DECLARATION -->
+            <section>
+                <h2 class="section-title">Declaration</h2>
+                <div class="declaration-box">
+                    <p>I hereby declare that the information provided above is true to the best of my knowledge.</p>
+                    <div class="declaration-footer">
+                        <span>Place: Coimbatore</span>
+                        <span>Signature: Ponmughil</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
